@@ -1,0 +1,415 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/* Opcional: estilo personalizado para el scrollbar */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #e4c5df;
+}
+
+* {
+  box-sizing: border-box;
+}
+ 
+
+.hero-logo {
+  position: fixed;
+  margin: 2em;
+  color: #301b22;
+  font-style: 2em;
+  z-index: 2;
+}
+
+.menu-open {
+	color: #301b22;
+  
+}
+
+.menu-open,
+.menu-close {
+	position: absolute;
+
+	font-size: 2em;
+	cursor: pointer;
+}
+
+.nav-container {
+	position: fixed;
+	left: -100%;
+	width: 100%;
+	height: 100vh;
+	background: #fff;
+}
+
+.menu__item {
+  color: inherit;
+  text-decoration: none;
+	position: relative;
+	padding: 0 6vw;
+}
+
+.menu__item-link {
+  color: inherit;
+  text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	transition: opacity 0.4s;
+}
+
+.menu__item-link::before {
+	all: initial;
+	counter-increment: menu;
+	position: absolute;
+	bottom: 60%;
+	left: 0;
+	pointer-events: none;
+}
+
+.menu__item-link:hover {
+	transition-duration: 0.1s;
+	opacity: 0;
+}
+
+.menu__item-img {
+  text-decoration: none;
+	z-index: 2;
+	pointer-events: none;
+	position: absolute;
+	height: 12vh;
+	max-height: 600px;
+	opacity: 0;
+	left: 8%;
+	top: 10%;
+	transform: scale(0);
+}
+
+.menu__item-link:hover + .menu__item-img {
+	opacity: 1;
+	transform: scale(1);
+	transition: all 0.4s;
+}
+
+.menu {
+  text-decoration: none;
+	padding: 10vh 0 25vh;
+	--offset: 10vw;
+	--move-initial: calc(-25% + var(--offset));
+	--move-final: calc(-50% + var(--offset));
+	font-size: 3vw;
+    font-family: "Neue Montreal";
+}
+
+.marquee {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	color: rgb(214, 214, 214);
+	pointer-events: none;
+}
+
+.marquee__inner {
+	width: fit-content;
+	display: flex;
+	position: relative;
+	opacity: 0;
+	transition: all 0.1s;
+	transform: translateX(60px);
+}
+
+.menu__item-link:hover ~ .marquee .marquee__inner {
+	opacity: 1;
+	transform: translateX(0px);
+	transition-duration: 0.4s;
+}
+
+.menu__item-link,
+.marquee span {
+	white-space: nowrap;
+	padding: 0 1vw;
+	line-height: 1.15;
+}
+
+.marquee span {
+	font-style: italic;
+}
+
+
+
+:root {
+  --text-color: #111;
+  --bg-color: #e5e5e5;
+}
+
+
+
+.menu-open {
+	color: #000000;
+	top: 0;
+	right: 0;
+	padding: 40px;
+	font-size: 20px;
+	position: fixed;
+	cursor: pointer;
+	z-index: 2;
+}
+
+
+.menu-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 40px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+
+.nav-container {
+	position: fixed;
+	left: -100%;
+	width: 100%;
+	height: 100vh;
+	background: #FFF;
+	z-index: 3;
+}
+
+.menu__item {
+	position: relative;
+	padding: 0 6vw;
+}
+
+.menu__item-link {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	transition: opacity 0.4s;
+}
+
+.menu__item-link::before {
+	all: initial;
+	counter-increment: menu;
+	position: absolute;
+	bottom: 60%;
+	left: 0;
+	pointer-events: none;
+}
+
+.menu__item-link:hover {
+	transition-duration: 0.1s;
+	opacity: 0;
+}
+
+
+
+.menu__item-link:hover + .menu__item-img {
+	opacity: 1;
+	transform: scale(1);
+	transition: all 0.4s;
+}
+
+.menu {
+	padding: 10vh 0 25vh;
+	--offset: 20vw;
+	--move-initial: calc(-25% + var(--offset));
+	--move-final: calc(-50% + var(--offset));
+	font-size: 3vw;
+}
+
+.marquee {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	color: rgb(214, 214, 214);
+	pointer-events: none;
+}
+
+.marquee__inner {
+	width: fit-content;
+	display: flex;
+	position: relative;
+	opacity: 0;
+	transition: all 0.1s;
+	transform: translateX(60px);
+}
+
+.menu__item-link:hover ~ .marquee .marquee__inner {
+	opacity: 1;
+	transform: translateX(0px);
+	transition-duration: 0.4s;
+}
+
+.menu__item-link,
+.marquee span {
+	white-space: nowrap;
+	font-size: 6vw;
+	padding: 0 1vw;
+	line-height: 1.15;
+}
+
+.marquee span {
+	font-style: italic;
+}
+
+
+
+body {
+  font-family: 'Poppins';
+  margin: 0;
+}
+
+.section {
+  width: 100%;
+  padding: 7rem 0;
+}
+
+.bg-muted {
+	background: linear-gradient(-45deg, #e8e8e8, #dba1d7, #c1d7e7, #ad87d3);
+	background-size: 1000% 1000%;
+	animation: gradient 7s ease infinite;
+	height: 100%;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.section-title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #301b22;
+}
+
+.section-description {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #301b22;
+}
+
+.projects-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  background-color: #dfe6e8;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-images img {
+  width: 100%;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.carousel-button.prev {
+  left: 10px;
+}
+
+.carousel-button.next {
+  right: 10px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  background-color: #e4c5df;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 12px 12px;
+  border-radius: 20px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.card-tech,
+.card-functions {
+  margin-top: 20px;
+}
+
+.card-tech h4,
+.card-functions h4 {
+  margin-bottom: 10px;
+}
