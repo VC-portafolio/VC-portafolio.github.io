@@ -3,55 +3,66 @@ gsap.registerPlugin(ScrollTrigger);
 const pageContainer = document.querySelector(".container");
 
 /* SMOOTH SCROLL */
-const scroller = new LocomotiveScroll({
-  el: pageContainer,
-  smooth: true
-});
+if (window.innerWidth > 1024) { // Solo activar en desktop
+  const scroller = new LocomotiveScroll({
+    el: pageContainer,
+    smooth: true
+  });
 
-scroller.on("scroll", ScrollTrigger.update);
+  scroller.on("scroll", ScrollTrigger.update);
 
-ScrollTrigger.scrollerProxy(pageContainer, {
-  scrollTop(value) {
-    return arguments.length
-      ? scroller.scrollTo(value, 0, 0)
-      : scroller.scroll.instance.scroll.y;
-  },
-  getBoundingClientRect() {
-    return {
-      left: 0,
-      top: 0,
-      width: window.innerWidth,
-      height: window.innerHeight
-    };
-  },
-  pinType: pageContainer.style.transform ? "transform" : "fixed"
-});
+  ScrollTrigger.scrollerProxy(pageContainer, {
+    scrollTop(value) {
+      return arguments.length
+        ? scroller.scrollTo(value, 0, 0)
+        : scroller.scroll.instance.scroll.y;
+    },
+    getBoundingClientRect() {
+      return {
+        left: 0,
+        top: 0,
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+    },
+    pinType: pageContainer.style.transform ? "transform" : "fixed"
+  });
+}
 
 ////////////////////////////////////
 ////////////////////////////////////
 window.addEventListener("load", function () {
-  let pinBoxes = document.querySelectorAll(".pin-wrap > *");
-  let pinWrap = document.querySelector(".pin-wrap");
-  let pinWrapWidth = pinWrap.offsetWidth;
-  let horizontalScrollLength = pinWrapWidth - window.innerWidth;
+  if (window.innerWidth > 1024) { // Solo activar en desktop
+    let pinBoxes = document.querySelectorAll(".pin-wrap > *");
+    let pinWrap = document.querySelector(".pin-wrap");
+    let pinWrapWidth = pinWrap.offsetWidth;
+    let horizontalScrollLength = pinWrapWidth - window.innerWidth;
 
-  // Pinning and horizontal scrolling
+    // Pinning and horizontal scrolling
+    gsap.to(".pin-wrap", {
+      scrollTrigger: {
+        scroller: pageContainer, //locomotive-scroll
+        scrub: true,
+        trigger: "#sectionPin",
+        pin: true,
+        start: "top top",
+        end: pinWrapWidth
+      },
+      x: -horizontalScrollLength,
+      ease: "none"
+    });
 
-  gsap.to(".pin-wrap", {
-    scrollTrigger: {
-      scroller: pageContainer, //locomotive-scroll
-      scrub: true,
-      trigger: "#sectionPin",
-      pin: true,
-      // anticipatePin: 1,
-      start: "top top",
-      end: pinWrapWidth
-    },
-    x: -horizontalScrollLength,
-    ease: "none"
-  });
+    ScrollTrigger.addEventListener("refresh", () => scroller.update());
+    ScrollTrigger.refresh();
+  }
+});
 
-  ScrollTrigger.addEventListener("refresh", () => scroller.update()); //locomotive-scroll
-
-  ScrollTrigger.refresh();
+// Actualizar al cambiar tamaño de ventana
+window.addEventListener('resize', function() {
+  if (window.innerWidth <= 1024) {
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    if (typeof scroller !== 'undefined' && scroller.destroy) {
+      scroller.destroy();
+    }
+  }
 });
